@@ -1,0 +1,10 @@
+node_modules_*
+node_modules/*
+!node_modules/.cache
+.git
+Dockerfile*
+.dockerignore
+dist*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

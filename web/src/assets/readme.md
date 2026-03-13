@@ -1,0 +1,1 @@
+Thư mục chứa các tệp tin hình ảnh, css, .. sẽ được webpack xử lý.

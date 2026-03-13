@@ -1,0 +1,1 @@
+Thư mục khai báo toàn bộ store của hệ thống. Sử dụng Vuex để xử lý. Mỗi store là 1 folder riêng

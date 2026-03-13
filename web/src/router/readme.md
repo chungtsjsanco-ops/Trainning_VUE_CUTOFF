@@ -1,0 +1,1 @@
+Khai báo router cho toàn bộ hệ thống.

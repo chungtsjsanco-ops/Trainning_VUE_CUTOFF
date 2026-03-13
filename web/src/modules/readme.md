@@ -1,0 +1,1 @@
+Thư mục chứa các modules (các pages) của website. Trong này có thể khai báo các components khác để xử dụng.
