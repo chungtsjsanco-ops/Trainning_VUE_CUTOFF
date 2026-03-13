@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: training-backend
+  datasource:
+    # DB mặc định (DEFAULT)
+    # Oracle SERVICE_NAME format: jdbc:oracle:thin:@//host:port/service_name
+    url: jdbc:oracle:thin:@//localhost:1521/ORCL
+    username: ecms
+    password: ecms
+    driver-class-name: oracle.jdbc.OracleDriver
+
+app:
+  datasources:
+    second:
+      # DB thứ 2 (SECOND)
+      # Oracle SERVICE_NAME format: jdbc:oracle:thin:@//host:port/service_name
+      jdbcUrl: jdbc:oracle:thin:@//10.47.135.149:1521/CAHUE
+      username: cahue
+      password: Cahue@123
+      driver-class-name: oracle.jdbc.OracleDriver
+  jwt:
+    secret: training-backend-jwt-secret-key-256bit-do-not-use-in-production
+    expiration: 86400000  # 24 hours in ms
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
