@@ -15,5 +15,6 @@ git checkout origin/main -- api/config.json  --> check file cụ thể
 git checkout origin/main -- api web  --> check nhiều thư mục
 
 hoặc xem file thay đổi trên git
-git fetch
+git fetch --> lay all cac brach tren git ve
+git branch -r --> Kiểm tra branch remote
 git diff origin/main
