@@ -26,12 +26,10 @@ public class THUEBAOKLLService {
         @Autowired
         DbContext dbContext;
 
-        public ArrayList<Map<String, Object>> LYDO_OB_VIEW(ConnectionManager.Connections connection)
+        public ArrayList<Map<String, Object>> LYDO_OB_VIEW()
                         throws AppSqlException {
                 // Nếu caller truyền null thì vẫn ép về SECOND cho chắc chắn.
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
                 ArrayList<SqlParameter> parameters = new ArrayList<>();
                 parameters.add(new SqlParameter(
                                 "RESULTS",
@@ -42,69 +40,16 @@ public class THUEBAOKLLService {
                 // NOTE: đổi tên SP này theo đúng schema/package của bạn.
                 return dbContext.executeSpWithCursorToListMap(
                                 connection,
-                                "LYDO_OB_VIEW",
+                                "TB_KLL.LYDO_OB_VIEW",
                                 parameters);
         }
 
-        public ArrayList<Map<String, Object>> DANHSACH_TB_KHONG_OB_VIEW(ConnectionManager.Connections connection)
-                        throws AppSqlException {
-                // Nếu caller truyền null thì vẫn ép về SECOND cho chắc chắn.
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
-                ArrayList<SqlParameter> parameters = new ArrayList<>();
-                parameters.add(new SqlParameter(
-                                "RESULTS",
-                                null,
-                                SqlParameter.ParameterDirection.OUTPUT,
-                                java.sql.Types.REF_CURSOR));
-
-                // NOTE: đổi tên SP này theo đúng schema/package của bạn.
-                return dbContext.executeSpWithCursorToListMap(
-                                connection,
-                                "DANHSACH_TB_KHONG_OB_VIEW",
-                                parameters);
-        }
-
-        public ArrayList<Map<String, Object>> TIMKIEM_TB_KHONG_OB_VIEW(String prmTHONGTIN,
-                        ConnectionManager.Connections connection)
+        public ArrayList<Map<String, Object>> SOLIEU_KLL_VIEW(Number prmDK, String prmNGAY)
                         throws AppSqlException {
 
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
                 ArrayList<SqlParameter> parameters = new ArrayList<>();
-
-                parameters.add(new SqlParameter(
-                                "prmTHONGTIN",
-                                prmTHONGTIN,
-                                SqlParameter.ParameterDirection.INPUT,
-                                java.sql.Types.VARCHAR));
-
-                // OUTPUT cursor
-                parameters.add(new SqlParameter(
-                                "RESULTS",
-                                null,
-                                SqlParameter.ParameterDirection.OUTPUT,
-                                java.sql.Types.REF_CURSOR));
-
-                return dbContext.executeSpWithCursorToListMap(
-                                connection,
-                                "TB_KLL.TIMKIEM_TB_KHONG_OB_VIEW",
-                                parameters);
-        }
-
-        public ArrayList<Map<String, Object>> SOLIEU_KLL_VIEW(Number prmDK, String prmNGAY,
-                        ConnectionManager.Connections connection)
-                        throws AppSqlException {
-
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
-
-                ArrayList<SqlParameter> parameters = new ArrayList<>();
-
                 // INPUT
                 parameters.add(new SqlParameter(
                                 "prmDK",
@@ -113,10 +58,9 @@ public class THUEBAOKLLService {
                                 java.sql.Types.INTEGER));
                 parameters.add(new SqlParameter(
                                 "prmNGAY",
-                                prmDK,
+                                prmNGAY,
                                 SqlParameter.ParameterDirection.INPUT,
                                 java.sql.Types.VARCHAR));
-
                 // OUTPUT cursor
                 parameters.add(new SqlParameter(
                                 "RESULTS",
@@ -130,13 +74,10 @@ public class THUEBAOKLLService {
                                 parameters);
         }
 
-        public ArrayList<Map<String, Object>> SOLIEU_KLL_VIEW_OB(String prmNGAY, String prmNGUOI_CAPNHAT,
-                        ConnectionManager.Connections connection)
+        public ArrayList<Map<String, Object>> SOLIEU_KLL_VIEW_OB(String prmNGAY, String prmNGUOI_CAPNHAT)
                         throws AppSqlException {
 
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
                 ArrayList<SqlParameter> parameters = new ArrayList<>();
 
@@ -165,87 +106,47 @@ public class THUEBAOKLLService {
                                 parameters);
         }
 
-        public ArrayList<Map<String, Object>> SOLIEU_TB_KLL_2_INS(Clob prmJsonData, String prmNGUOI_CAPNHAT,
-                        ConnectionManager.Connections connection)
+        public ArrayList<Map<String, Object>> DANHSACH_TB_KHONG_OB_VIEW()
                         throws AppSqlException {
-
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
                 ArrayList<SqlParameter> parameters = new ArrayList<>();
-
-                // INPUT
                 parameters.add(new SqlParameter(
-                                "prmJsonData",
-                                prmJsonData,
-                                SqlParameter.ParameterDirection.INPUT,
-                                java.sql.Types.CLOB));
-                parameters.add(new SqlParameter(
-                                "prmNGUOI_CAPNHAT",
-                                prmNGUOI_CAPNHAT,
-                                SqlParameter.ParameterDirection.INPUT,
-                                java.sql.Types.VARCHAR));
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
 
+                // NOTE: đổi tên SP này theo đúng schema/package của bạn.
                 return dbContext.executeSpWithCursorToListMap(
                                 connection,
-                                "TB_KLL.SOLIEU_TB_KLL_2_INS",
+                                "TB_KLL.DANHSACH_TB_KHONG_OB_VIEW",
                                 parameters);
         }
 
-        public ArrayList<Map<String, Object>> DANHSACH_TB_KHONG_OB_INS(Clob prmJsonData, String prmNGUOI_CAPNHAT,
-                        ConnectionManager.Connections connection)
+        public ArrayList<Map<String, Object>> TIMKIEM_TB_KHONG_OB_VIEW(String prmTHONGTIN)
                         throws AppSqlException {
 
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
                 ArrayList<SqlParameter> parameters = new ArrayList<>();
 
-                // INPUT
                 parameters.add(new SqlParameter(
-                                "prmJsonData",
-                                prmJsonData,
-                                SqlParameter.ParameterDirection.INPUT,
-                                java.sql.Types.CLOB));
-                parameters.add(new SqlParameter(
-                                "prmNGUOI_CAPNHAT",
-                                prmNGUOI_CAPNHAT,
+                                "prmTHONGTIN",
+                                prmTHONGTIN,
                                 SqlParameter.ParameterDirection.INPUT,
                                 java.sql.Types.VARCHAR));
 
-                return dbContext.executeSpWithCursorToListMap(
-                                connection,
-                                "TB_KLL.DANHSACH_TB_KHONG_OB_INS",
-                                parameters);
-        }
-
-        public ArrayList<Map<String, Object>> DANHSACH_TB_KHONG_OB_DEL(Number prmTHUEBAO_ID, String prmNGUOI_CAPNHAT,
-                        ConnectionManager.Connections connection)
-                        throws AppSqlException {
-
-                if (connection == null) {
-                        connection = ConnectionManager.Connections.SECOND;
-                }
-
-                ArrayList<SqlParameter> parameters = new ArrayList<>();
-
-                // INPUT
+                // OUTPUT cursor
                 parameters.add(new SqlParameter(
-                                "prmTHUEBAO_ID",
-                                prmTHUEBAO_ID,
-                                SqlParameter.ParameterDirection.INPUT,
-                                java.sql.Types.NUMERIC));
-                parameters.add(new SqlParameter(
-                                "prmNGUOI_CAPNHAT",
-                                prmNGUOI_CAPNHAT,
-                                SqlParameter.ParameterDirection.INPUT,
-                                java.sql.Types.VARCHAR));
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
 
                 return dbContext.executeSpWithCursorToListMap(
                                 connection,
-                                "TB_KLL.DANHSACH_TB_KHONG_OB_DEL",
+                                "TB_KLL.TIMKIEM_TB_KHONG_OB_VIEW",
                                 parameters);
         }
 
@@ -268,7 +169,8 @@ public class THUEBAOKLLService {
                                 java.sql.Types.NVARCHAR));
 
                 ArrayList<Map<String, Object>> rs = dbContext.executeSpWithCursorToListMap(
-                                "PKG_KLL.SOLIEU_TB_KLL_2_INS",
+                                ConnectionManager.Connections.SECOND,
+                                "TB_KLL.SOLIEU_TB_KLL_2_INS",
                                 parameters);
                 if (rs != null && !rs.isEmpty()) {
                         if ("1".equals(String.valueOf(rs.get(0).get("item"))))
@@ -277,4 +179,61 @@ public class THUEBAOKLLService {
                 return Boolean.FALSE;
         }
 
+        public Boolean DANHSACH_TB_KHONG_OB_INS(SolieuKllDTO input) throws AppSqlException {
+
+                String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+
+                parameters.add(new SqlParameter(
+                                "prmJsonData",
+                                input.getPrmJsonData(),
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.CLOB));
+
+                parameters.add(new SqlParameter(
+                                "prmNGUOI_CAPNHAT",
+                                currentUser,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.NVARCHAR));
+
+                ArrayList<Map<String, Object>> rs = dbContext.executeSpWithCursorToListMap(
+                                ConnectionManager.Connections.SECOND,
+                                "TB_KLL.DANHSACH_TB_KHONG_OB_INS",
+                                parameters);
+                if (rs != null && !rs.isEmpty()) {
+                        if ("1".equals(String.valueOf(rs.get(0).get("item"))))
+                                return Boolean.TRUE;
+                }
+                return Boolean.FALSE;
+        }
+
+        public Boolean DANHSACH_TB_KHONG_OB_DEL(SolieuKllDTO input) throws AppSqlException {
+
+                String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+
+                parameters.add(new SqlParameter(
+                                "prmTHUEBAO_ID",
+                                input.getPrmTHUEBAO_ID(),
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.INTEGER));
+
+                parameters.add(new SqlParameter(
+                                "prmNGUOI_CAPNHAT",
+                                currentUser,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.NVARCHAR));
+
+                ArrayList<Map<String, Object>> rs = dbContext.executeSpWithCursorToListMap(
+                                ConnectionManager.Connections.SECOND,
+                                "TB_KLL.DANHSACH_TB_KHONG_OB_DEL",
+                                parameters);
+                if (rs != null && !rs.isEmpty()) {
+                        if ("1".equals(String.valueOf(rs.get(0).get("item"))))
+                                return Boolean.TRUE;
+                }
+                return Boolean.FALSE;
+        }
 }
