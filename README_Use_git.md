@@ -18,3 +18,5 @@ hoặc xem file thay đổi trên git
 git fetch --> lay all cac brach tren git ve
 git branch -r --> Kiểm tra branch remote
 git diff origin/main
+
+git branch --> kiem tra cac brach hien co
