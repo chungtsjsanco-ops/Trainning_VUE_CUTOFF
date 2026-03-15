@@ -1,0 +1,61 @@
+<div class="kll-page">
+  <div class="kll-page__header mb-3">
+    <h5 class="kll-page__title mb-0">Thuê bao KLL / Điểm tin thuê bao KLL</h5>
+  </div>
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body py-3">
+      <div class="row align-items-end">
+        <div class="col-md-3 mb-2 mb-md-0">
+          <label class="form-label mb-1">Xem theo</label>
+          <b-form-select v-model="filterType" size="sm">
+            <b-form-select-option value="detail">Chi tiết</b-form-select-option>
+            <b-form-select-option value="summary">Tổng hợp</b-form-select-option>
+          </b-form-select>
+        </div>
+        <div class="col-md-3 mb-2 mb-md-0">
+          <label class="form-label mb-1">Thời gian *</label>
+          <b-form-input
+            v-model="filterDate"
+            type="date"
+            size="sm"
+          />
+        </div>
+        <div class="col-md-2">
+          <b-button
+            variant="primary"
+            size="sm"
+            class="px-4"
+            @click="onSearch"
+          >
+            Xem
+          </b-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header py-2 kll-table__header">
+      <strong>DANH SÁCH THUÊ BAO KLL</strong>
+    </div>
+    <div class="card-body p-0">
+      <b-table
+        :items="items"
+        :fields="fields"
+        bordered
+        small
+        responsive="sm"
+        hover
+        show-empty
+        empty-text="Chưa có dữ liệu nào"
+        class="mb-0 kll-table"
+      >
+        <template #cell(index)="data">
+          {{ data.index + 1 }}
+        </template>
+      </b-table>
+    </div>
+  </div>
+</div>
+

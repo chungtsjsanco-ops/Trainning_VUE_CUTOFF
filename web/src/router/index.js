@@ -27,6 +27,16 @@ const router = new Router({
           path: 'demo-report',
           name: 'DemoReport',
           component: () => import('@/modules/Demo/Report')
+        },
+        {
+          path: 'diemtin_tb_kll',
+          name: 'Điểm tin thuê bao KLL',
+          component: () => import('@/modules/Thuebao_KLL/DiemTinKLL')
+        },
+        {
+          path: 'ob_tb_kll',
+          name: 'OB thuê bao KLL',
+          component: () => import('@/modules/Thuebao_KLL/OB_TBKLL')
         }
       ]
     },
