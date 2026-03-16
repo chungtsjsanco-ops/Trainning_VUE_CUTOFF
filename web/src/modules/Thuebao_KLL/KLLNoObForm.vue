@@ -98,7 +98,7 @@ export default {
         NGUOI_DE_NGHI: this.form.NGUOI_DE_NGHI || '',
         NGUYENNHAN: this.form.NGUYENNHAN || ''
       }
-console.log(jsonData);
+
       const prmJsonData = JSON.stringify(jsonData)
       const prmNGUOI_CAPNHAT =
         this.prmNguoiCapnhat ||

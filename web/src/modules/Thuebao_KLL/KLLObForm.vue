@@ -28,21 +28,19 @@
       </div>
       <div class="col-md-6">
         <b-form-group label="Kết quả OB *">
-          <b-form-select v-model="form.obResult">
+          <b-form-select v-model="form.obResult" @change="onServiceChange" @input="onServiceChange">
             <b-form-select-option :value="null" disabled>--- Chọn ---</b-form-select-option>
-            <b-form-select-option value="THANH_CONG">Thành công</b-form-select-option>
-            <b-form-select-option value="KHONG_LIEN_LAC">Không liên lạc được</b-form-select-option>
-            <b-form-select-option value="KHACH_TU_CHOI">Khách từ chối</b-form-select-option>
+            <b-form-select-option value="1">OB thành công</b-form-select-option>
+            <b-form-select-option value="2">OB không thành công</b-form-select-option>
           </b-form-select>
         </b-form-group>
       </div>
       <div class="col-md-6">
         <b-form-group label="Kết quả OB chi tiết *">
-          <b-form-select v-model="form.obResultDetail">
-            <b-form-select-option :value="null" disabled>--- Chọn ---</b-form-select-option>
-            <b-form-select-option value="LAN_1">Lần 1</b-form-select-option>
-            <b-form-select-option value="LAN_2">Lần 2</b-form-select-option>
-            <b-form-select-option value="LAN_3">Lần 3</b-form-select-option>
+          <b-form-select v-model="selected_Ds_lydo" :options="service_Ds_lydo">
+            <template #first>
+              <b-form-select-option :value="null" disabled>-- Chọn lý do --</b-form-select-option>
+            </template>
           </b-form-select>
         </b-form-group>
       </div>
@@ -77,6 +75,8 @@ export default {
     }
   },
   data: () => ({
+    selected_Ds_lydo: null,
+    service_Ds_lydo: [],
     form: {
       center: '',
       area: '',
@@ -102,6 +102,35 @@ export default {
     }
   },
   methods: {
+    async fetchServices(dk) {
+      this.loading = true
+      try {
+        const res = await this.$root.context.get('/api/thuebao_kll/LYDO_OB_VIEW', {})
+        const items = (res && res.data) || []
+        const filtered = items.filter((x) => x.LOAI == dk)
+        this.service_Ds_lydo = filtered.map((x) => ({
+          value: x.ID_LYDO,
+          text: x.NOIDUNG_OB
+        }))
+      } catch (e) {
+        this.$bvToast.toast('Không tải được danh sách lý do.', {
+          title: 'Lỗi',
+          variant: 'danger',
+          autoHideDelay: 3000,
+          toaster: 'b-toaster-bottom-right'
+        })
+      } finally {
+        this.loading = false
+      }
+    },
+    onServiceChange(value) {
+      if (value != null) {
+        this.fetchServices(value)
+      } else {
+        this.service_Ds_lydo = []
+        this.selected_Ds_lydo = null
+      }
+    },
     async onSubmit() {
       if (!this.record) {
         return
@@ -147,9 +176,7 @@ export default {
           })
           this.$emit('close')
         } else {
-          const msg =
-            (res && (res.message_detail || res.message)) ||
-            'Không lưu được kết quả OB thuê bao KLL.'
+          const msg = (res && (res.message_detail || res.message)) || 'Không lưu được kết quả OB thuê bao KLL.'
 
           this.$bvToast &&
             this.$bvToast.toast(msg, {
@@ -162,9 +189,7 @@ export default {
       } catch (e) {
         const resp = e && (e.response || e.res)
         const data = resp && resp.data
-        const msg =
-          (data && (data.message_detail || data.message)) ||
-          'Không kết nối được máy chủ để lưu kết quả OB.'
+        const msg = (data && (data.message_detail || data.message)) || 'Không kết nối được máy chủ để lưu kết quả OB.'
 
         this.$bvToast &&
           this.$bvToast.toast(msg, {
@@ -178,4 +203,3 @@ export default {
   }
 }
 </script>
-

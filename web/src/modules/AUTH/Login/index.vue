@@ -3,8 +3,8 @@
 export default {
   name: 'Login',
   data: () => ({
-    username: '',
-    password: '',
+    username: 'admin',
+    password: 'admin123',
     loading: false,
     loginFailed: false
   }),

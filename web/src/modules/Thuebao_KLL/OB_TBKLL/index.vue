@@ -82,6 +82,7 @@ export default {
     openNoObModal(item) {
       this.selectedRecord = item
       this.showNoObModal = true
+      console.log(this.selectedRecord);
     },
 
     openObModal(item) {

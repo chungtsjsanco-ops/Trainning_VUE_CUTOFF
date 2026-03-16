@@ -127,11 +127,6 @@ export default {
     async fetchLoaiTb() {
       this.loadingLoaiTb = true
       try {
-        //const res = await this.$root.context.get('/api/sample/loaihinh_tb', {
-        //params: {
-        //loai: this.selectedService
-        //}
-        //})
         const res = await this.$root.context.get('/api/sample/loaihinh_tb?loai=' + this.selectedService)
         const items = (res && res.data) || []
         this.loaiTbOptions = items.map((x) => ({
