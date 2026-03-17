@@ -1,14 +1,37 @@
 <template>
   <div class="main-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
-      <span class="navbar-brand fw-bold">Training Web</span>
-      <div class="ms-auto d-flex align-items-center">
-        <span class="text-white me-3">
-          <i class="fa fa-user mr-1"></i> {{ userName }}
-        </span>
-        <button class="btn btn-outline-light btn-sm" @click="doLogout">Đăng xuất</button>
-      </div>
-    </nav>
+    <b-navbar type="dark" variant="primary" class="px-4">
+      <b-navbar-brand to="/" class="font-weight-bold">
+        Training Web
+      </b-navbar-brand>
+
+      <b-navbar-nav>
+        <b-nav-item to="/" exact>Trang chủ</b-nav-item>
+        <b-nav-item to="/demo">Demo</b-nav-item>
+        <b-nav-item-dropdown text="Thuê bao KLL">
+          <b-dropdown-item to="/diemtin_tb_kll">
+            Điểm tin thuê bao KLL
+          </b-dropdown-item>
+          <b-dropdown-item to="/ob_tb_kll">
+            OB thuê bao KLL
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+
+      <b-navbar-nav class="ml-auto align-items-center">
+        <b-nav-item-dropdown right>
+          <template #button-content>
+            <span class="text-white">
+              <i class="fa fa-user mr-1"></i> {{ userName }}
+            </span>
+          </template>
+          <b-dropdown-item-button @click="doLogout">
+            <i class="fa fa-sign-out mr-2"></i> Đăng xuất
+          </b-dropdown-item-button>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-navbar>
+
     <div class="content-wrapper p-4">
       <router-view />
     </div>
@@ -41,7 +64,6 @@ export default {
   background-color: #f8f9fa;
 }
 .content-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
 }
 </style>
