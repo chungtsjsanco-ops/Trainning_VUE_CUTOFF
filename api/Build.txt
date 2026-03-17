@@ -1,0 +1,5 @@
+1. Cài docker
+2. docker build -t training-api .
+3. docker run -d -p 8080:8080 training-api
+3.1 docker ps -- kiem tra xem chay chua neu chua chay --> 4
+4. docker run -d -p 8080:8080 --name training-api training-api
