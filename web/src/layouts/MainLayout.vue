@@ -15,6 +15,9 @@
           <b-dropdown-item to="/ob_tb_kll">
             OB thuê bao KLL
           </b-dropdown-item>
+           <b-dropdown-item to="/no_ob_tb_kll">
+            Danh sách thuê bao không xác minh
+          </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
 

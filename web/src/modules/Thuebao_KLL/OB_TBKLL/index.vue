@@ -82,7 +82,6 @@ export default {
     openNoObModal(item) {
       this.selectedRecord = item
       this.showNoObModal = true
-      console.log(this.selectedRecord);
     },
 
     openObModal(item) {
@@ -94,7 +93,6 @@ export default {
       // payload có thể được truyền từ form con (NoOb / Ob) với prmNGAY, prmNGUOI_CAPNHAT
       const overrideNgay = payload && payload.prmNGAY
       const overrideNguoi = payload && payload.prmNGUOI_CAPNHAT
-
       if (!this.filterDate && !overrideNgay) {
         return
       }

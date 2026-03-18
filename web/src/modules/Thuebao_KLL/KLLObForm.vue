@@ -1,5 +1,15 @@
 <template>
   <b-form @submit.prevent="onSubmit">
+    <b-alert
+      :show="!!inlineError"
+      variant="warning"
+      class="mb-3"
+      dismissible
+      @dismissed="inlineError = null"
+    >
+      {{ inlineError }}
+    </b-alert>
+
     <div class="row">
       <div class="col-md-6">
         <b-form-group label="Trung tâm viễn thông">
@@ -75,6 +85,7 @@ export default {
     }
   },
   data: () => ({
+    inlineError: null,
     selected_Ds_lydo: null,
     service_Ds_lydo: [],
     form: {
@@ -93,6 +104,7 @@ export default {
       immediate: true,
       handler(newVal) {
         if (!newVal) return
+        this.inlineError = null
         this.form.center = newVal.center || ''
         this.form.area = newVal.area || ''
         this.form.subscriberName = newVal.subscriberName || ''
@@ -136,15 +148,16 @@ export default {
         return
       }
 
-      if (!this.form.obResult || !this.form.obResultDetail) {
-        this.$nextTick(() => {
-          this.$bvToast.toast('Vui lòng chọn đầy đủ Kết quả OB và Kết quả OB chi tiết.', {
-            title: 'Thiếu thông tin',
-            variant: 'warning',
-            autoHideDelay: 3000,
-            toaster: 'b-toaster-bottom-right'
-          })
-        })
+      // đồng bộ giá trị detail từ dropdown lý do
+      this.form.obResultDetail = this.selected_Ds_lydo
+
+      if (!this.form.obResult) {
+        this.inlineError = 'Vui lòng chọn Kết quả OB.'
+        return
+      }
+
+      if (!this.form.obResultDetail) {
+        this.inlineError = 'Vui lòng chọn Kết quả OB chi tiết.'
         return
       }
 
