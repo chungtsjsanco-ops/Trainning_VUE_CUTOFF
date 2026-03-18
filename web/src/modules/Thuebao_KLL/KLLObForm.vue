@@ -137,13 +137,14 @@ export default {
       }
 
       if (!this.form.obResult || !this.form.obResultDetail) {
-        this.$bvToast &&
+        this.$nextTick(() => {
           this.$bvToast.toast('Vui lòng chọn đầy đủ Kết quả OB và Kết quả OB chi tiết.', {
             title: 'Thiếu thông tin',
             variant: 'warning',
             autoHideDelay: 3000,
             toaster: 'b-toaster-bottom-right'
           })
+        })
         return
       }
 
@@ -177,7 +178,6 @@ export default {
           this.$emit('close')
         } else {
           const msg = (res && (res.message_detail || res.message)) || 'Không lưu được kết quả OB thuê bao KLL.'
-
           this.$bvToast &&
             this.$bvToast.toast(msg, {
               title: 'Lỗi',
