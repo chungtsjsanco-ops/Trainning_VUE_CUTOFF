@@ -17,7 +17,7 @@
             size="sm"
             class="px-4"
             :disabled="loadingSearch"
-            @click="onSearchByMaTb"
+            @click="onSearchByMaTb(maTb)"
           >
             <b-spinner small v-if="loadingSearch" class="mr-1" />
             Tìm kiếm
@@ -84,8 +84,33 @@
         <template #cell(index)="data">
           {{ data.index + 1 }}
         </template>
+        <template #cell(note)="data">
+          <b-button
+          size="sm"
+          variant="danger"
+          @click="confirmDelete(data)"
+        >
+          Xóa
+        </b-button>
+        </template>
       </b-table>
     </div>
   </div>
+
+  <!-- Modal: Thuê bao KLL không cần OB -->
+  <b-modal
+    v-model="showNoObModal"
+    title="Thuê bao KLL không cần OB"
+    size="lg"
+    hide-footer
+  >
+    <KLLNoObForm
+      :record="selectedRecord"
+      :prm-ngay="null"
+      :prm-nguoi-capnhat="null"
+      @close="showNoObModal = false"
+      @saved="handleSaved"
+    />
+  </b-modal>
 </div>
 

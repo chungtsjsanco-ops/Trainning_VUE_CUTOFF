@@ -131,7 +131,8 @@ export default {
             prmNGUOI_CAPNHAT: prmNGUOI_CAPNHAT || null
           })
           this.$emit('close')
-        } else {
+        } 
+        else {
           const msg =
             (res && (res.message_detail || res.message)) ||
             'Không lưu được thông tin không cần OB.'
@@ -144,7 +145,8 @@ export default {
               toaster: 'b-toaster-bottom-right'
             })
         }
-      } catch (e) {
+      } 
+      catch (e) {
         // Trường hợp backend trả HTTP 400/500, lấy message_detail trong body nếu có
         const resp = e && (e.response || e.res)
         const data = resp && resp.data
