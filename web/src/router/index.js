@@ -42,6 +42,11 @@ const router = new Router({
           path: 'no_ob_tb_kll',
           name: 'Danh sách thuê bao không OB',
           component: () => import('@/modules/Thuebao_KLL/NO_OB_TBKLL')
+        },
+        {
+          path: 'diemtin_suyhao',
+          name: 'Điểm tin suy hao',
+          component: () => import('@/modules/SuyHao/DiemTinSuyHao')
         }
       ]
     },

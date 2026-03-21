@@ -12,11 +12,19 @@
           <b-dropdown-item to="/diemtin_tb_kll">
             Điểm tin thuê bao KLL
           </b-dropdown-item>
+          <b-dropdown-item to="/diemtin_suyhao">
+            Điểm tin suy hao
+          </b-dropdown-item>
           <b-dropdown-item to="/ob_tb_kll">
             OB thuê bao KLL
           </b-dropdown-item>
            <b-dropdown-item to="/no_ob_tb_kll">
             Danh sách thuê bao không xác minh
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item-dropdown text="Suy hao">
+        <b-dropdown-item to="/diemtin_suyhao">
+            Điểm tin suy hao
           </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
