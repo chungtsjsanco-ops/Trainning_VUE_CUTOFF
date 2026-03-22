@@ -26,6 +26,12 @@
         <b-dropdown-item to="/diemtin_suyhao">
             Điểm tin suy hao
           </b-dropdown-item>
+          <b-dropdown-item to="/diemtin_suyhao_thang">
+            Điểm tin suy hao tổng hợp
+          </b-dropdown-item>
+          <b-dropdown-item to="">
+            Điểm tin suy hao theo thời gian
+          </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
 

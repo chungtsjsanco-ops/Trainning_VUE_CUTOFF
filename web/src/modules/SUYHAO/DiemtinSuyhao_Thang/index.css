@@ -1,0 +1,51 @@
+.suyhao-page {
+  padding: 0.75rem 0.5rem;
+}
+
+.suyhao-page__header {
+  padding: 0.25rem 0.5rem 0;
+}
+
+.suyhao-page__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.suyhao-table__header {
+  background-color: #ffe7d2;
+  border-bottom: 1px solid #f2c9a8;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.suyhao-table thead th {
+  background-color: #ffe7d2;
+  border-color: #f2c9a8;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.suyhao-table tbody td {
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+
+.suyhao-table th:first-child,
+.suyhao-table td:first-child {
+  width: 40px;
+  min-width: 40px;
+}
+
+.suyhao-table tfoot td {
+  font-size: 0.9rem;
+}
+
+.suyhao-summary-row td {
+  background: #3f95c7;
+  color: #fff;
+  border-color: #2f82b3;
+}
+

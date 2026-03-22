@@ -47,6 +47,11 @@ const router = new Router({
           path: 'diemtin_suyhao',
           name: 'Điểm tin suy hao',
           component: () => import('@/modules/SuyHao/DiemTinSuyHao')
+        },
+        {
+          path: 'diemtin_suyhao_thang',
+          name: 'Điểm tin suy hao tổng hợp',
+          component: () => import('@/modules/SuyHao/DiemTinSuyHao_Thang')
         }
       ]
     },

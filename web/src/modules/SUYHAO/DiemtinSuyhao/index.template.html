@@ -114,7 +114,13 @@
         </table>
       </div>
     </div>
-    <b-pagination v-model="currentPage" :total-rows="filterType == 1 ? items_olt.length : items_chitiet.length"
-      :per-page="perPage" align="center" size="sm" class="my-2" />
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="filterType == 1 ? items_olt.length : items_chitiet.length"
+      :per-page="perPage"
+      align="center"
+      size="sm"
+      class="my-2"
+    />
   </div>
 </div>

@@ -22,81 +22,112 @@ import java.util.Map;
 
 @Service
 public class SuyhaoService {
-    @Autowired
-    DbContext dbContext;
+        @Autowired
+        DbContext dbContext;
 
-    public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_CTS_VIEWNGAY(String prmNGAY)
-            throws AppSqlException {
+        public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_CTS_VIEWNGAY(String prmNGAY)
+                        throws AppSqlException {
 
-        ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
-        ArrayList<SqlParameter> parameters = new ArrayList<>();
-        // INPUT
-        parameters.add(new SqlParameter(
-                "prmNGAY",
-                prmNGAY,
-                SqlParameter.ParameterDirection.INPUT,
-                java.sql.Types.VARCHAR));
-        // OUTPUT cursor
-        parameters.add(new SqlParameter(
-                "RESULTS",
-                null,
-                SqlParameter.ParameterDirection.OUTPUT,
-                java.sql.Types.REF_CURSOR));
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+                // INPUT
+                parameters.add(new SqlParameter(
+                                "prmNGAY",
+                                prmNGAY,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.VARCHAR));
+                // OUTPUT cursor
+                parameters.add(new SqlParameter(
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
 
-        return dbContext.executeSpWithCursorToListMap(
-                connection,
-                "SUYHAO_CTS.SOLIEU_SUYHAO_CTS_VIEWNGAY",
-                parameters);
-    }
+                return dbContext.executeSpWithCursorToListMap(
+                                connection,
+                                "SUYHAO_CTS.SOLIEU_SUYHAO_CTS_VIEWNGAY",
+                                parameters);
+        }
 
-    public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_OLT_VIEWNGAY(String prmNGAY)
-            throws AppSqlException {
+        public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_OLT_VIEWNGAY(String prmNGAY)
+                        throws AppSqlException {
 
-        ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
-        ArrayList<SqlParameter> parameters = new ArrayList<>();
-        // INPUT
-        parameters.add(new SqlParameter(
-                "prmNGAY",
-                prmNGAY,
-                SqlParameter.ParameterDirection.INPUT,
-                java.sql.Types.VARCHAR));
-        // OUTPUT cursor
-        parameters.add(new SqlParameter(
-                "RESULTS",
-                null,
-                SqlParameter.ParameterDirection.OUTPUT,
-                java.sql.Types.REF_CURSOR));
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+                // INPUT
+                parameters.add(new SqlParameter(
+                                "prmNGAY",
+                                prmNGAY,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.VARCHAR));
+                // OUTPUT cursor
+                parameters.add(new SqlParameter(
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
 
-        return dbContext.executeSpWithCursorToListMap(
-                connection,
-                "SUYHAO_CTS.SOLIEU_SUYHAO_OLT_VIEWNGAY",
-                parameters);
-    }
+                return dbContext.executeSpWithCursorToListMap(
+                                connection,
+                                "SUYHAO_CTS.SOLIEU_SUYHAO_OLT_VIEWNGAY",
+                                parameters);
+        }
 
-    public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_OLT_TONGHOP_NGAY(String prmNGAY)
-            throws AppSqlException {
+        public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_OLT_TONGHOP_NGAY(String prmNGAY)
+                        throws AppSqlException {
 
-        ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
 
-        ArrayList<SqlParameter> parameters = new ArrayList<>();
-        // INPUT
-        parameters.add(new SqlParameter(
-                "prmNGAY",
-                prmNGAY,
-                SqlParameter.ParameterDirection.INPUT,
-                java.sql.Types.VARCHAR));
-        // OUTPUT cursor
-        parameters.add(new SqlParameter(
-                "RESULTS",
-                null,
-                SqlParameter.ParameterDirection.OUTPUT,
-                java.sql.Types.REF_CURSOR));
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+                // INPUT
+                parameters.add(new SqlParameter(
+                                "prmNGAY",
+                                prmNGAY,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.VARCHAR));
+                // OUTPUT cursor
+                parameters.add(new SqlParameter(
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
 
-        return dbContext.executeSpWithCursorToListMap(
-                connection,
-                "SUYHAO_CTS.SOLIEU_SUYHAO_OLT_TONGHOP_NGAY",
-                parameters);
-    }
+                return dbContext.executeSpWithCursorToListMap(
+                                connection,
+                                "SUYHAO_CTS.SOLIEU_SUYHAO_OLT_TONGHOP_NGAY",
+                                parameters);
+        }
+
+        public ArrayList<Map<String, Object>> SOLIEU_SUYHAO_OLT_TONGHOP_TUNGAY_DENNGAY(String prmTUNGAY,
+                        String prmDENNGAY)
+                        throws AppSqlException {
+
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
+
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+                // INPUT
+                parameters.add(new SqlParameter(
+                                "prmTUNGAY",
+                                prmTUNGAY,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.VARCHAR));
+                parameters.add(new SqlParameter(
+                                "prmDENNGAY",
+                                prmDENNGAY,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.VARCHAR));
+                // OUTPUT cursor
+                parameters.add(new SqlParameter(
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
+
+                return dbContext.executeSpWithCursorToListMap(
+                                connection,
+                                "SUYHAO_CTS.SOLIEU_SUYHAO_OLT_TONGHOP_TUNGAY_DENNGAY",
+                                parameters);
+        }
 }

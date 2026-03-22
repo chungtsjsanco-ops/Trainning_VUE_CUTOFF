@@ -32,7 +32,7 @@ public class SuyhaoController {
         return rs.getResponseEntity();
     }
 
-    @Operation(summary = "trả về danh sách suy hao tổng hợp")
+    @Operation(summary = "trả về danh sách suy hao tổng hợp theo olt")
     @GetMapping("/SOLIEU_SUYHAO_OLT_VIEWNGAY")
     public ResponseEntity<ApiResult> suyhao_olt(@RequestParam(value = "prmNGAY", required = false) String prmNGAY) {
         ApiResult rs = new ApiResult();
@@ -55,4 +55,19 @@ public class SuyhaoController {
         }
         return rs.getResponseEntity();
     }
+
+    @Operation(summary = "trả về Điểm tin theo khoảng thời gian")
+    @GetMapping("/SOLIEU_SUYHAO_OLT_TONGHOP_TUNGAY_DENNGAY")
+    public ResponseEntity<ApiResult> tonghop_tungay_denngay(
+            @RequestParam(value = "prmTUNGAY", required = false) String prmTUNGAY,
+            @RequestParam(value = "prmDENNGAY", required = false) String prmDENNGAY) {
+        ApiResult rs = new ApiResult();
+        try {
+            rs.setData(suyhaoService.SOLIEU_SUYHAO_OLT_TONGHOP_TUNGAY_DENNGAY(prmTUNGAY, prmDENNGAY));
+        } catch (AppSqlException e) {
+            rs.setException(e);
+        }
+        return rs.getResponseEntity();
+    }
+
 }
