@@ -1,5 +1,10 @@
 1. Cài docker
-2. docker build -t training-api .
-3. docker run -d -p 8080:8080 training-api
-3.1 docker ps -- kiem tra xem chay chua neu chua chay --> 4
-4. docker run -d -p 8080:8080 --name training-api training-api
+2. docker images --> xem các images trên docker
+2.1 docker image prune -f --> xóa image rác
+2.2 docker system prune -a -f --> xóa tất cả image ko dùng ( dùng 2.1 thì khỏi dùng 2.2 )
+3. docker build -t training-api . --> build api
+3.1 docker build -t training-api:latest . --> build với tag cố định
+4. docker run -d -p 8080:8080 training-api 
+4.0 docker run --rm -p 8080:8080 training-api --> container tắt là tự xóa
+4.1 docker ps -- kiem tra xem chay chua neu chua chay --> 4
+5. docker run -d -p 8080:8080 --name training-api training-api
