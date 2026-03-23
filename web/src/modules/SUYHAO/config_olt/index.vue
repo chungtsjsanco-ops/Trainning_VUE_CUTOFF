@@ -11,23 +11,35 @@ export default {
     service_Ds_tram: [],
 
     loading: false,
-    items: []
+    loading_tram: false,
+    items: [],
+    items_tram: []
   }),
   computed: {},
   created() {
     this.danhsach_donvi()
   },
   methods: {
+     getDetailFields() {
+      return [
+        { key: 'index', label: '#', thClass: 'text-center', tdClass: 'text-center' },
+        { key: 'TEN_DV_BK', label: 'Trung tâm viễn thông' },
+        { key: 'TO_KYTHUAT', label: 'Tổ kỹ thuật' },
+        { key: 'SYSTEMNAME', label: 'SYSTEMNAME' },
+        { key: 'note', label: '' }
+      ]
+    },
+
     async danhsach_donvi() {
       this.loading = true
       try {
         const res = await this.$root.context.get('/api/suyhao/VIEW_DS_DONVI', {
-          prmDk: 1,
-          prmDONVI: ''
+          prmDK: 1,
+          prmDONVI: null
         })
 
         const items = (res && res.data) || []
-        this.serviceOptions = items.map((x) => ({
+        this.service_Ds_donvi = items.map((x) => ({
           value: x.MA,
           text: x.TEN_MOI
         }))
@@ -44,23 +56,23 @@ export default {
     },
 
     onServiceDonvi() {
-      if (this.donviSelect) {
+      if (this.selected_Ds_donvi) {
         this.danhsach_tram()
       }
     },
 
-    danhsach_tram() {
+    async danhsach_tram() {
       this.loading = true
       try {
-        const res = this.$root.context.get('/api/suyhao/VIEW_DS_DONVI', {
-          prmDk: 2,
-          prmDONVI: this.donviSelect
+        const res2 = await this.$root.context.get('/api/suyhao/VIEW_DS_DONVI', {
+          prmDK: 2,
+          prmDONVI: this.selected_Ds_donvi
         })
 
-        const items = (res && res.data) || []
-        this.serviceOptions = items.map((x) => ({
+        const items_tram = (res2 && res2.data) || []
+        this.service_Ds_tram = items_tram.map((x) => ({
           value: x.MA,
-          text: x.TEN_MOI
+          text: x.TEN
         }))
       } catch (e) {
         this.$bvToast.toast('Không tải được danh sách trạm.', {
@@ -77,48 +89,31 @@ export default {
     mapItems(apiItems) {
       if (!Array.isArray(apiItems)) return []
       return apiItems.map((x) => ({
-        ALLCOUNT_MONTH: x.ALLCOUNT_MONTH || '',
-        ALLCOUNT_PRE: x.ALLCOUNT_PRE || '',
-        ALLCOUNT_TODAY: x.ALLCOUNT_TODAY || '',
-        BADCOUNT_MONTH: x.BADCOUNT_MONTH || '',
-        BADCOUNT_PRE: x.BADCOUNT_PRE || '',
-        BADCOUNT_TODAY: x.BADCOUNT_TODAY || '',
-        PERCENT_MONTH: x.PERCENT_MONTH || '',
-        PERCENT_PRE: x.PERCENT_PRE || '',
-        PERCENT_TODAY: x.PERCENT_TODAY || '',
-        STT: x.STT,
-        TANG_GIAM: x.TANG_GIAM,
-        TTVT: x.TTVT
+        TEN_DV_BK: x.TEN_DV_BK,
+        TO_KYTHUAT: x.TO_KYTHUAT || '',
+        SYSTEMNAME: x.SYSTEMNAME || ''
       }))
     },
 
     async onSearch() {
-      this.loading = true
-      this.currentPage = 1
-      this.items = []
-
-      const [year, month, day] = this.filterDate.split('-')
-      const prmTUNGAY = `${day}/${month}/${year}`
-
-      const [year1, month1, day1] = this.filterDate_2.split('-')
-      const prmDENNGAY = `${day1}/${month1}/${year1}`
-
-      try {
-        const res = await this.$root.context.get('/api/suyhao/SOLIEU_SUYHAO_OLT_TONGHOP_TUNGAY_DENNGAY', {
-          prmTUNGAY: prmTUNGAY,
-          prmDENNGAY: prmDENNGAY
-        })
-        const rawItems = (res && res.data) || []
-        this.items = this.mapItems(rawItems)
-      } catch (e) {
+      if (this.selected_Ds_tram) {
+        this.loading = true
         this.items = []
-      } finally {
-        this.loading = false
-      }
-    },
 
-    onExport() {
-      // TODO: gắn API/file export tổng hợp
+        try {
+          const res = await this.$root.context.get('/api/suyhao/VIEW_DS_DONVI', {
+            prmDK: 3,
+            prmDONVI: this.selected_Ds_tram
+          })
+          const rawItems = (res && res.data) || []
+           this.fields = this.getDetailFields()
+          this.items = this.mapItems(rawItems)
+        } catch (e) {
+          this.items = []
+        } finally {
+          this.loading = false
+        }
+      }
     }
   }
 }

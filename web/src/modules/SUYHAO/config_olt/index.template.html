@@ -7,20 +7,33 @@
     <div class="card-body py-3">
       <div class="row align-items-end">
         <div class="col-md-2 mb-2 mb-md-0">
-          <label class="form-label mb-1">Đơn vị *</label>
-            <b-form-select id="donviSelect" v-model="selected_Ds_donvi" :options="service_Ds_donvi" :disabled="loading" @change="onServiceDonvi">
-            <template #first>
-              <b-form-select-option :value="null" disabled>-- Chọn đơn vị --</b-form-select-option>
-            </template>
+          <b-form-group label="Chọn đơn vị" label-for="donviSelect">
+            <b-form-select
+              id="donviSelect"
+              v-model="selected_Ds_donvi"
+              :options="service_Ds_donvi"
+              :disabled="loading"
+              @change="onServiceDonvi"
+            >
+              <template #first>
+                <b-form-select-option :value="null" disabled>-- Chọn đơn vị --</b-form-select-option>
+              </template>
             </b-form-select>
+          </b-form-group>
         </div>
         <div class="col-md-2 mb-2 mb-md-0">
-          <label class="form-label mb-1">Tổ kỹ thuật *</label>
-          <b-form-select id="tramSelect" v-model="selected_Ds_tram" :options="service_Ds_tram" :disabled="loading">
-            <template #first>
-              <b-form-select-option :value="null" disabled>-- Chọn trạm --</b-form-select-option>
-            </template>
+          <b-form-group label="Chọn tổ kỹ thuật" label-for="tramSelect">
+            <b-form-select
+              id="tramSelect"
+              v-model="selected_Ds_tram"
+              :options="service_Ds_tram"
+              :disabled="loading_tram"
+            >
+              <template #first>
+                <b-form-select-option :value="null" disabled>-- Chọn tổ kỹ thuật --</b-form-select-option>
+              </template>
             </b-form-select>
+          </b-form-group>
         </div>
         <div class="col-md-4">
           <b-button variant="primary" size="sm" class="px-4 mr-2" :disabled="loading" @click="onSearch">
@@ -36,7 +49,21 @@
       <strong>Danh sách OLT theo đơn vị</strong>
     </div>
     <div class="card-body p-0">
-
+      <b-table
+        :items="items"
+        :fields="fields"
+        bordered
+        small
+        responsive="sm"
+        hover
+        show-empty
+        empty-text="Chưa có dữ liệu nào"
+        class="mb-0"
+      >
+        <template #cell(index)="data">
+          {{ data.index + 1 }}
+        </template>
+      </b-table>
     </div>
   </div>
 </div>
