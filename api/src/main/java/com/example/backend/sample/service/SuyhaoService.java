@@ -5,7 +5,7 @@ import com.example.backend.database.AppSqlException;
 import com.example.backend.database.ConnectionManager;
 import com.example.backend.database.DbContext;
 import com.example.backend.database.SqlParameter;
-import com.example.backend.sample.dto.SolieuKllDTO;
+import com.example.backend.sample.dto.SuyhaoDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -130,4 +130,50 @@ public class SuyhaoService {
                                 "SUYHAO_CTS.SOLIEU_SUYHAO_OLT_TONGHOP_TUNGAY_DENNGAY",
                                 parameters);
         }
+
+        public ArrayList<Map<String, Object>> VIEW_DS_DONVI(Number prmDK,
+                        String prmDONVI)
+                        throws AppSqlException {
+
+                ConnectionManager.Connections connection = ConnectionManager.Connections.SECOND;
+
+                ArrayList<SqlParameter> parameters = new ArrayList<>();
+                // INPUT
+                parameters.add(new SqlParameter(
+                                "prmDK",
+                                prmDK,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.INTEGER));
+                parameters.add(new SqlParameter(
+                                "prmDONVI",
+                                prmDONVI,
+                                SqlParameter.ParameterDirection.INPUT,
+                                java.sql.Types.VARCHAR));
+                // OUTPUT cursor
+                parameters.add(new SqlParameter(
+                                "RESULTS",
+                                null,
+                                SqlParameter.ParameterDirection.OUTPUT,
+                                java.sql.Types.REF_CURSOR));
+
+                return dbContext.executeSpWithCursorToListMap(
+                                connection,
+                                "SUYHAO_CTS.VIEW_DS_DONVI",
+                                parameters);
+        }
+
+        public Boolean CNTT_OLT_CONFIG_INS(SuyhaoDTO input) throws AppSqlException {
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        ArrayList<SqlParameter> parameters = new ArrayList<>();
+        parameters.add(new SqlParameter("prmSYSTEMNAME", input.getSYSTEMNAME(), SqlParameter.ParameterDirection.INPUT, java.sql.Types.NVARCHAR));
+        parameters.add(new SqlParameter("prmDONVI", input.getPrmDONVI(), SqlParameter.ParameterDirection.INPUT, java.sql.Types.NVARCHAR));
+        parameters.add(new SqlParameter("prmTOKYTHUAT", input.getPrmTOKYTHUAT(), SqlParameter.ParameterDirection.INPUT, java.sql.Types.NVARCHAR));
+        parameters.add(new SqlParameter("prmNSD", currentUser, SqlParameter.ParameterDirection.INPUT, java.sql.Types.NVARCHAR));
+        ArrayList<Map<String, Object>> rs = dbContext.executeSpWithCursorToListMap("CNTT_OLT_CONFIG_INS", parameters);
+        if (rs != null && !rs.isEmpty()) {
+            if ("1".equals(String.valueOf(rs.get(0).get("item"))))
+                return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }    
 }

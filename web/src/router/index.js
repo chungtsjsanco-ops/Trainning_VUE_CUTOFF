@@ -52,6 +52,16 @@ const router = new Router({
           path: 'diemtin_suyhao_thang',
           name: 'Điểm tin suy hao tổng hợp',
           component: () => import('@/modules/SuyHao/DiemTinSuyHao_Thang')
+        },
+        {
+          path: 'diemtin_suyhao_tungay_denngay',
+          name: 'Điểm tin suy hao từ ngày đến ngày',
+          component: () => import('@/modules/SuyHao/DiemTinSuyHao_TUNGAY_DENNGAY')
+        },
+        {
+          path: 'config_olt',
+          name: 'Danh sách olt theo đơn vị',
+          component: () => import('@/modules/SuyHao/CONFIG_OLT')
         }
       ]
     },

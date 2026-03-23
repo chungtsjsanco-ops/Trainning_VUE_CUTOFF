@@ -1,0 +1,73 @@
+<div class="suyhao-page">
+  <div class="suyhao-page__header mb-3">
+    <h5 class="suyhao-page__title mb-0">Suy hao / Suy hao CTS từ ngày đến ngày</h5>
+  </div>
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body py-3">
+      <div class="row align-items-end">
+        <div class="col-md-2 mb-2 mb-md-0">
+          <label class="form-label mb-1">Từ ngày *</label>
+          <b-form-input v-model="filterDate" type="date" size="sm" />
+        </div>
+        <div class="col-md-2 mb-2 mb-md-0">
+          <label class="form-label mb-1">Đến ngày *</label>
+          <b-form-input v-model="filterDate_2" type="date" size="sm" />
+        </div>
+        <div class="col-md-4">
+          <b-button variant="primary" size="sm" class="px-4 mr-2" :disabled="loading" @click="onSearch">
+            Xem
+          </b-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header py-2 suyhao-table__header">
+      <strong>DANH SÁCH SUY HAO CTS</strong>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm mb-0 suyhao-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Xếp hạng kém</th>
+              <th rowspan="2">Địa bàn</th>
+              <th colspan="3" class="text-center">Theo ngày: từ ngày {{filterDate_view}} đến {{filterDate_view_2}}</th>
+              <th colspan="3" class="text-center">Theo tháng: từ ngày {{filterDate_view}} đến {{filterDate_view_2}}</th>
+            </tr>
+            <tr>
+              <th class="text-center">Số ONU có dữ liệu</th>
+              <th class="text-center">Kém</th>
+              <th class="text-center">Tỉ lệ kém (%)</th>
+              <th class="text-center">Số ONU có dữ liệu</th>
+              <th class="text-center">Kém</th>
+              <th class="text-center">Tỉ lệ kém (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="loading">
+              <td colspan="18" class="text-center py-3">Đang tải dữ liệu...</td>
+            </tr>
+            <tr v-else-if="items.length === 0">
+              <td colspan="18" class="text-center py-3">Chưa có dòng dữ liệu nào</td>
+            </tr>
+            <tr v-for="(row, idx) in items" :key="idx">
+              <td class="text-center">
+                <span v-if="row.STT !== 9999">{{ row.STT }}</span>
+              </td>
+              <td>{{ row.TTVT }}</td>
+              <td class="text-right">{{ row.ALLCOUNT_TODAY }}</td>
+              <td class="text-right">{{ row.BADCOUNT_TODAY }}</td>
+              <td>{{ row.PERCENT_TODAY }}</td>
+              <td class="text-right">{{ row.ALLCOUNT_MONTH }}</td>
+              <td class="text-right">{{ row.BADCOUNT_MONTH }}</td>
+              <td>{{ row.PERCENT_MONTH }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

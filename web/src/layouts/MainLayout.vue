@@ -29,8 +29,11 @@
           <b-dropdown-item to="/diemtin_suyhao_thang">
             Điểm tin suy hao tổng hợp
           </b-dropdown-item>
-          <b-dropdown-item to="">
+          <b-dropdown-item to="diemtin_suyhao_tungay_denngay">
             Điểm tin suy hao theo thời gian
+          </b-dropdown-item>
+          <b-dropdown-item to="config_olt">
+            Danh sách olt theo đơn vị
           </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>

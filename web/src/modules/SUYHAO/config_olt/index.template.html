@@ -1,0 +1,42 @@
+<div class="suyhao-page">
+  <div class="suyhao-page__header mb-3">
+    <h5 class="suyhao-page__title mb-0">Suy hao / Danh sách olt theo đơn vị</h5>
+  </div>
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body py-3">
+      <div class="row align-items-end">
+        <div class="col-md-2 mb-2 mb-md-0">
+          <label class="form-label mb-1">Đơn vị *</label>
+            <b-form-select id="donviSelect" v-model="selected_Ds_donvi" :options="service_Ds_donvi" :disabled="loading" @change="onServiceDonvi">
+            <template #first>
+              <b-form-select-option :value="null" disabled>-- Chọn đơn vị --</b-form-select-option>
+            </template>
+            </b-form-select>
+        </div>
+        <div class="col-md-2 mb-2 mb-md-0">
+          <label class="form-label mb-1">Tổ kỹ thuật *</label>
+          <b-form-select id="tramSelect" v-model="selected_Ds_tram" :options="service_Ds_tram" :disabled="loading">
+            <template #first>
+              <b-form-select-option :value="null" disabled>-- Chọn trạm --</b-form-select-option>
+            </template>
+            </b-form-select>
+        </div>
+        <div class="col-md-4">
+          <b-button variant="primary" size="sm" class="px-4 mr-2" :disabled="loading" @click="onSearch">
+            Xem
+          </b-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header py-2 suyhao-table__header">
+      <strong>Danh sách OLT theo đơn vị</strong>
+    </div>
+    <div class="card-body p-0">
+
+    </div>
+  </div>
+</div>
